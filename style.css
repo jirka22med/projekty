@@ -1,0 +1,1039 @@
+/* Modernější proměnné a základní nastavení */
+    /* Modernější proměnné a základní nastavení */
+    :root {
+        /* Přidání chybějící proměnné */
+        --spacing-unit: 16px;
+        --primary-color: #2196F3;
+        --secondary-color: #00ff80;
+        --accent-color: #ff2d55;
+        --background-dark: #0a0a0a  ;
+        --background-light: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #b3b3b3;
+        --spacing-sm: 6px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+body {
+    background-color: var(--background-dark);
+        color: var(--text-primary);
+        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        margin: 0;
+        padding: var(--spacing-unit);
+        text-align: center;
+        font-weight: bold;
+        position: relative; /* Abychom mohli umístit obrázek v pozadí */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+}
+
+.content {
+    position: relative; /* Zajišťuje, že obsah bude nad obrázkem */
+    z-index: 10; /* Obsah bude nad obrázkem */
+}
+
+.background-image {
+        position: absolute; /* Nastavení pozice obrázku za obsah */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Obrázek bude pod obsahem */
+        object-fit: cover; /* Upraví obrázek tak, aby pokryl celou plochu */
+    }
+
+ 
+
+       .header-title, #trackTitle {
+       font-family: Copperplate, 'Copperplate Gothic Light';    
+       font-size: 3rem;
+       font-weight: bold;
+       background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+       background-size: 400% 400%;
+       -webkit-background-clip: text;
+       color: transparent;
+       animation: gradientAnimation 30s ease infinite;
+       margin-bottom: 40px;
+       user-select: none; /* Zabrání označení textu */  
+          
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  z-index: 10;   
+    }
+         /* Animace pro plynulé přechody */
+    @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+    }
+
+.header-title::before {
+        background: rgba(0, 30, 50, 0.8);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 1000px;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #0077ff;
+  box-shadow: 0 0 30px rgba(0,255,255,0.5);
+  z-index: 10;
+    }
+
+
+/* Modernější kontejner přehrávače */
+    .audio-container {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        max-width: 1500px;
+        width: 100%;  /* Přidáno pro lepší responsivitu */
+        margin: 0 auto;
+        padding: var(--spacing-lg);
+        transition: var(--transition);
+        font-size: 30px;
+        user-select: none; /* Zabrání označení textu */
+        /* Centrování obsahu */
+        display: flex;
+        flex-direction: column;  /* Přidáno pro vertikální layout */
+        align-items: center;     /* Horizontální centrování */
+        justify-content: center; /* Vertikální centrování */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+.audio-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        font-size: 30px;
+    }
+
+    /* Pro lepší responsivitu */
+    @media screen and (max-width: 768px) {
+        .audio-container {
+            width: 95%;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) auto;
+        }
+    }
+
+
+/* Aktivní přehrávání */
+    .now-playing {
+        background: linear-gradient(45deg, rgba(33, 150, 243, 0.2), rgba(0, 255, 128, 0.2));
+        border-left: 4px solid var(--primary-color);
+        
+        /* Přidání zvýraznění na levé straně */
+        position: relative;
+        padding-left: 40px; /* Odsazení pro levé číslování */
+    }
+    /* Now playing indikátor pro číslo  2*/
+    .now-playing::before {
+        content: counter(playlist-counter);
+        counter-increment: playlist-counter;
+        position: absolute;
+        left: 12px;
+        color: goldenrod;
+        font-size: 0.9em;
+        opacity: 1; /* Zvýšení opacity pro aktivní položku */
+        font-weight: 600; /* Ztučnění číslování */
+    }
+
+    /* Now playing indikátor pro číslo */
+    .now-playing::after {
+        content: counter(playlist-counter);
+        position: absolute;
+        right: 12px;
+        color: goldenrod;
+        font-size: 0.9em;
+        opacity: 1; /* Zvýšení opacity pro aktivní položku */
+        font-weight: 600; /* Ztučnění číslování */
+    }
+
+/* Pokud máte další elementy v playlist-item, můžete je specificky stylovat */
+    .playlist-item .song-title {
+        text-align: center;
+        width: 10%;
+        color: aquamarine;
+    }
+
+    .playlist-item .duration {
+        position: absolute;
+        right: 20px;
+        color: aquamarine;
+    }
+
+    /* Případné další metadata */
+    .playlist-item .metadata {
+        text-align: center;
+        width: 10%;
+        font-size: 0.9em;
+        color: var(--text-secondary);
+    }
+
+    /* Responsivní úpravy pro číslování */
+    @media screen and (max-width: 480px) {
+        .playlist-item::before {
+            left: 8px;
+            font-size: 0.8em;
+        }
+        
+        .playlist-item span {
+            padding-left: 16px;
+        }
+    }
+/* Styl pro tlačítko oblíbené skladby */
+    .favorite-button {
+        background: none;
+        border: none;
+        font-size: 1.1rem; /* Zvětšení velikosti tlačítka */
+        cursor: pointer;
+        color: #f39c12; /* Zlatá barva pro hvězdičky */
+        user-select: none; /* Zabrání označení textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+        
+    }
+
+/* Vylepšené ovládací prvky */
+    .controls {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        margin: var(--spacing-lg) 0;
+        flex-wrap: wrap;
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+/* Styl pro tlačítka */
+    button {
+        background: rgba(255, 255, 255, 0.1);*/
+    border: none;
+    border-radius: 50px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.4rem; /* Větší písmo pro snadnější ovládání */
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s; /* Zlepšení přechodových efektů */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Středování obsahu */
+    
+    user-select: none; /* Zabrání označení textu */
+     z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+
+/* Zvýraznění tlačítek, když hraje hudba */
+    button.playing {
+        background: rgba(33, 150, 243, 0.7); /* Světle modrá pro zvýraznění */
+        color: #fff; /* Bílé písmo pro kontrast */
+        box-shadow: 0 0 20px rgba(33, 150, 243, 0.5); /* Měkký modrý stín */
+    }
+
+    /* Efekt při najetí myši */
+    button:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    /* Efekt pro stisknutí tlačítek */
+    button:active {
+        transform: scale(0.95); /* Mírné zmenšení pro stisknutí */
+    }
+
+/* Styl pro ovládání hlasitosti */
+    .volume-controls {
+        display: flex;
+        align-items: center; /* Vertikální zarovnání */
+        justify-content: center; /* Horizontální zarovnání */
+        gap: var(--spacing-md); /* Prostor mezi prvky */
+        margin-top: var(--spacing-lg); /* Mezera nad ovládáním hlasitosti */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+     
+    #volume-slider {
+        -webkit-appearance: none; /* Zrušení výchozího vzhledu */
+        width: 580px; /* Šířka posuvníku */
+        height: 12px; /* Výška posuvníku */
+        /*background: rgba(255, 255, 255, 0.3); /* Pozadí posuvníku */
+        border-radius: 5px; /* Zaoblení rohů */
+        outline: none; /* Odstranění okraje při aktivaci */
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+        background-size: 400% 400%; /* Zvětšení oblasti pro gradient */
+        animation: gradientAnimation 25s ease infinite; /* Aktivovaná animace pro plynulý přechod */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+     
+     /* Styl pro úchyt posuvníku */
+    #volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Zrušení výchozího vzhledu toto neměnit?? */
+        appearance: none; /* Zrušení výchozího vzhledu toto neměnit??? */
+        width: 15px; /* Šířka úchytu */
+        height: 15px; /* Výška úchytu */
+        border-radius: 50%; /* Zaoblení úchytu */
+        cursor: pointer; /* Změna kurzoru při najetí */
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+        background-size: 400% 400%; /* Zvětšení oblasti pro gradient */
+        animation: gradientAnimation 25s ease infinite; /* Aktivovaná animace pro plynulý přechod */
+        color: transparent; /* Skrytí základní barvy textu */ 
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+     
+     /* Styl pro úchyt posuvníku při najetí myši */
+    #volume-slider::-webkit-slider-thumb:hover {
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+        background-size: 400% 400%; /* Zvětšení oblasti pro gradient */
+        animation: gradientAnimation 25s ease infinite; /* Aktivovaná animace pro plynulý přechod */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+    /* Animace pro plynulý efekt úchytu */
+    @keyframes thumbAnimation {
+        0% {
+            background-color: #ff9800;
+        }
+        50% {
+            background-color: #4caf50;
+        }
+        100% {
+            background-color: #2196f3;
+        }
+    }
+
+/* Styl pro volume-value s animovaným pozadím */
+    #volume-value {
+        min-width: 36px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        font-family: 'Courier New', monospace;
+        z-index: 1;
+        position: relative;
+        font-size: 36px;
+        border: 1px solid #00ffcc;
+        border-radius: 50%;
+        padding: 12px 12px;
+        background: linear-gradient(90deg, #0a74da, #0a74da, #0e4a7a, #0e4a7a, #acacac, #acacac, #9b1b30, #9b1b30, #005f63, #005f63,
+        #b30059, #b30059, #ffdd00, #ffdd00, #8e44ad, #8e44ad, #1f77b4, #1f77b4, #2c3e50, #2c3e50,
+        #5d6d7e, #5d6d7e, #f39c12, #f39c12, #c0392b, #c0392b, #8e44ad, #8e44ad, #2980b9, #2980b9,
+        #34495e, #34495e, #d35400, #d35400, #16a085, #16a085, #f4d03f, #f4d03f, #7f8c8d, #7f8c8d);
+        background-size: 900% 900%;
+        animation: gradientAnimation 130s ease infinite;
+    }
+
+
+
+/* Styl pro progres bar */
+    #progress-bar {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 30%;
+        height: 20px;
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800); /* Gradient pozadí */
+        background-size: 400% 400%; /* Roztažení gradientu */
+        border-radius: 50px;
+        outline: none;
+        margin: 0 10px;
+        animation: gradientAnimation 25s ease infinite; /* Animace pro plynulý pohyb gradientu */
+        transition: background 25s ease-in-out; /* Plynulá změna pozadí */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+        
+    }
+
+/* Styl pro úchyt progres baru */
+    #progress-bar::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800); /* Gradient pozadí */
+        transition: transform 25s ease, background 25s ease; /* Plynulé změny pro úchyt */
+        cursor: pointer;
+        animation: thumbAnimation 25s ease infinite; /* Animace pro úchyt */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+        
+    }
+/* Styl pro thumb pro Firefox */
+    #progress-bar::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800); /* Gradient pozadí */
+        cursor: pointer;
+        transition: transform 25s ease, background 25s ease; /* Plynulé změny pro úchyt */
+        animation: thumbAnimation 25s ease infinite; /* Animace pro úchyt */
+        color: transparent; /* Skrytí základní barvy textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+/* Styl pro ikonu uvnitř tlačítka */
+    .material-icons {
+        margin-right: 5px; /* Mezery mezi ikonou a textem */
+        font-size: 18px; /* Velikost ikony */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+    p, ah {
+        font-size: 18px;
+        text-align: center;
+        color: goldenrod;
+        cursor: default; /* Zabrání zobrazení kurzoru pointer */
+        user-select: none; /* Zabrání označení textu */
+        z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }     
+      
+        /* Základní styl pro tlačítko smyčky */
+    #loop-button {
+        background: rgba(255, 255, 255, 0.1);*/
+    border: none;
+    border-radius: 50px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.4rem; /* Větší písmo pro snadnější ovládání */
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s; /* Zlepšení přechodových efektů */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Středování obsahu */
+    
+    user-select: none; /* Zabrání označení textu */
+     z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+/* Styl pro aktivní stav tlačítka */
+    #loop-button.active {
+        background-color: #4caf50; /* zelená barva pro aktivní stav */
+        color: #fff; /* text v bílé barvě */
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* jemný zelený stín */
+    }
+
+    #loop-button:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);      
+    }
+      
+#fullscreen-toggle {
+        background: rgba(255, 255, 255, 0.1);*/
+    border: none;
+    border-radius: 50px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.4rem; /* Větší písmo pro snadnější ovládání */
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s; /* Zlepšení přechodových efektů */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Středování obsahu */
+    
+    user-select: none; /* Zabrání označení textu */
+     z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+/* Efekt po najetí myši */
+    #fullscreen-toggle:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    /* Efekt při aktivaci */
+    #fullscreen-toggle.active {
+        background-color: red; /* Zelená barva při aktivaci (full screen mode) */
+        color: #fff;
+    }
+
+
+      
+/* Styly pro toggle tlačítko */
+    #toggle-playlist-button {
+        background: rgba(255, 255, 255, 0.1);*/
+    border: none;
+    border-radius: 50px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.4rem; /* Větší písmo pro snadnější ovládání */
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s; /* Zlepšení přechodových efektů */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Středování obsahu */
+    
+    user-select: none; /* Zabrání označení textu */
+     z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    }
+
+
+#toggle-playlist-button:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    #toggle-playlist-button.active {
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Animace pro plynulé přechody */
+    .playlist-transition {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Scrollbar styly */
+    .playlist::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .playlist::-webkit-scrollbar-track {
+        background: var(--background-dark);
+    }
+
+    .playlist::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 3px;
+    }
+          
+    
+    /* Styl pro popisky, které budou skryté při načtení */
+    .popis {
+        display: none; /* Skryto při načtení stránky */
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #FFD700; /* Zlatá barva pro nadpis */
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+     
+    /* Styl pro jednotlivé odstavce popisků */
+    .popis {
+        display: block;
+        max-width: 50%; /* Maximální šířka nastavená na 50% */
+        margin: 4px auto; /* Centrované na střed */
+        padding: 5px 10px;
+        background-color: transparent;
+        color: #00bfff;
+        border-radius: 6px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+        text-align: center; /* Centrovaný text uvnitř */
+    }
+     
+    /* Hover efekt pro popisky, když nad nimi přejedeš myší */
+    .popis:hover {
+        background-color: #444; /* Tmavší pozadí při hoveru */
+        color: #FFD700; /* Zlatá barva pro text */
+        /* Odebráno text-shadow pro odstranění neonového efektu */
+    }
+
+/* Základní nastavení pro každou část času */ 
+.time-controls {
+    margin-top: -50px;
+    gap: 1rem;
+    padding: 1rem;
+    z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 💥 DŮLEŽITÉ pro centrování */
+}
+
+.time-controls .time-part, 
+.currentTime, 
+.duration {
+    font-family: 'Courier New', monospace;
+    font-size: 3rem;
+    user-select: none; /* Zabrání označení textu */
+    background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+    background-size: 400% 400%; /* Zvětšení oblasti pro gradient */
+    transition: transform 25s ease, background 25s ease;
+    animation: gradientAnimation 25s ease infinite;
+    -webkit-background-clip: text; /* Pro podporu zobrazení gradientu pouze na text */
+    color: transparent; /* Skrytí základní barvy textu */
+    z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    
+}
+
+.time-controls .time-separator {
+    font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+    font-size: 3rem;
+    animation: blink 1s step-start infinite, textGradientAnimation 25s ease infinite;
+    user-select: none; /* Zabrání označení textu */
+    background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800);
+    background-size: 400% 400%; /* Zvětšení oblasti pro gradient */
+    -webkit-background-clip: text; /* Pro podporu zobrazení gradientu pouze na text */
+    color: transparent; /* Skrytí základní barvy textu */
+    z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Animace gradientu pro text */
+@keyframes textGradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animace pro úchyt (thumb) posuvníku */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h2 {
+    font-size: 2.3rem; /* Nastavení velikosti písma */
+    font-weight: bold; /* Tučné písmo */
+    background: linear-gradient(45deg, #4caf50, #f44336, #2196f3, #ff9800); /* Gradient pozadí */
+    background-size: 400% 400%; /* Roztažení gradientu */
+    -webkit-background-clip: text; /* Použití gradientu na text */
+    color: transparent; /* Transparentní text pro aplikaci gradientu */
+    animation: textGradientAnimation 25s ease infinite; /* Pomalejší animace pro text */
+    user-select: none; /* Zabrání označení textu */
+    z-index: 2; /* Zajišťuje, že titulky a ovládání času budou nad pozadím */
+    margin-top: -35px;
+}
+
+/* Animace pro text s gradientem */
+@keyframes textGradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* Zajištění, že stránka nepůjde posouvat */
+body, html {
+    margin: 0; /* Odstranění výchozích okrajů */
+    padding: 0; /* Odstranění výchozího odsazení */
+    overflow: hidden; /* Zabrání posouvání stránky */
+    height: 100%; /* Zajistí správné zarovnání obsahu */
+}
+
+/* Kontejner pro obrázek */
+.image-container {
+    position: absolute; /* Umístíme na absolutní pozici */
+    top: 0; /* Nastavení na vrchol stránky */
+    left: 0; /* Nastavení na levou stranu stránky */
+    width: 100%; /* Zabírá celou šířku */
+    height: 100vh; /* Zabírá celou výšku okna prohlížeče */
+    overflow: hidden; /* Skrytí částí obrázku, které přesahují */
+    z-index: -1; /* Zajišťuje, že ostatní obsah bude nad pozadím */
+}
+
+/* Styl pro obrázek */
+.image-container img {
+    width: 100%; /* Obrázek vyplní celou šířku kontejneru */
+    height: 100%; /* Obrázek vyplní celou výšku kontejneru */
+    object-fit: cover; /* Obrázek se ořízne a zachová si poměr stran */
+}
+/* Oprava selektorů pro nestandardní elementy */
+tlacitko, pause-button {
+    background: rgba(255, 255, 255, 0.1); /* Odstraněno nadbytečné */ 
+    border: none;
+    border-radius: 50px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 12px 12px;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    user-select: none;
+    z-index: 2;
+}
+
+/* Styl pro aktivní stav tlačítek */
+tlacitko.active, pause-button {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+tlacitko.active, pause-button {
+    opacity: 1;
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+tlacitko:hover, pause-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);        
+}   
+
+/* Styl pro sekce */
+.section-header {
+    background-color: #282c34; /* Tmavý pozadí */
+    color: #ffffff; /* Bílý text */
+    font-size: 1.2em; /* Trochu větší text */
+    font-weight: bold; /* Tučné písmo */
+    padding: 10px; /* Vnitřní odsazení */
+    margin: 10px 0; /* Vnější odsazení (nahoře a dole) */
+    border-left: 4px solid #61dafb; /* Barevný proužek vlevo */
+    border-radius: 4px; /* Zaoblené rohy */
+}
+
+/*CSS STYLOVÁNÍ CELÉ STRANKY od Claude AI admirala naší velké rodiny? */
+/* Globální reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    user-select: none; /* Zabrání označení textu */
+}
+
+/* Centrovaní kontejneru */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: transparent; /* Žádný bílý rámeček */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+/* Styl pro hodiny */
+.time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: goldenrod; /* Barva textu */
+    gap: 0.5rem; /* Rozestup mezi časovými bloky */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+.time-text {
+    text-align: center;
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+.num {
+    font-weight: bold;
+    font-size: 3rem;
+    color: goldenrod; /* Barva číslic */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+.text {
+    font-size: 1rem;
+    color: goldenrod; /* Barva textu 'Hours', 'Minutes', 'Seconds' */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+.colon {
+    font-size: 3rem;
+    font-weight: bold;
+    color: goldenrod; /* Barva dvojteček */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px; 
+}
+
+/* Styl pro AM/PM */
+.am_pm {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    color: goldenrod; /* Barva AM/PM */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+/* Ikony */
+.icons {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
+    color: goldenrod; /* Barva ikon */
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+.fas {
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none; /* Zabrání označení textu */
+    margin-top: -5px;
+}
+
+
+
+/* Základní nastavení pro každou část času */ 
+.time-part {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.calendar {
+    text-align: center;
+    margin-top: -5px;
+    padding: 20px;
+}
+
+.calendar h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.calendar p {
+    margin: 5px 0 0;
+    font-size: 1.2em;
+}
+
+.date {
+    margin-top: -5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #00d4ff;
+}
+   
+footer {
+    margin-top: -15px; /* střed + rozumný odstup od obsahu */
+    color: #00FF7F;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 -2px 10px rgba(255, 215, 0, 0.5);
+    font-size: 19px;
+    border-radius: 10px;
+    letter-spacing: 0.2px;
+    display: inline-block;            /* ⚠️ klíč k úzkému tvaru */
+    max-width: 90%;                   /* trochu flexibility */
+}
+
+footer a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #1E90FF;
+    text-decoration: underline;
+}
+
+/* Středění wrapperu */
+footer-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#play-button.active {
+    background-color: lime;
+    box-shadow: 0 0 10px lime;
+}
+
+#pause-button.active {
+    background-color: red; /* nebo jiná barva pro pauzu */
+    box-shadow: 0 0 10px red; /* efektní záře pro pauzu */
+}
+.time-calendar-wrapper {
+  display: flex;
+  flex-direction: row; /* nebo row pro zobrazení vedle sebe */
+  gap: 10px; /* mezera mezi komponentami */
+  align-items: center;
+  font-size: 2rem;  
+}
+
+     /* Styly pro časovač */
+#timer-button.active {
+  background-color: #FF4500 !important;
+  color: var(--main-bg-color) !important;
+}
+
+.timer-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid var(--accent-color);
+}
+
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.timer-controls button {
+  padding: 5px 10px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.timer-controls button:hover {
+  background-color: var(--accent-color);
+  color: var(--main-bg-color);
+}
+
+.timer-display {
+  font-size: 1.5em;
+  font-family: 'Star Trek', monospace;
+  color: var(--accent-color);
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+}
+
+/* Styly pro menu oblíbených skladeb */
+.favorites-menu {
+  display: none;
+  position: absolute;
+  width: 520px;
+  max-height: 520px;
+  overflow-y: auto;
+  background-color: black;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  right: 10px;
+  top: 60px;
+  color: aqua;  
+}
+
+.favorites-menu h3 {
+  text-align: center;
+  color: var(--accent-color);
+  margin-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.favorites-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  margin-bottom: 4px;
+}
+
+.favorites-menu-item:hover {
+  background-color: rgba(255, 165, 0, 0.2);
+}
+
+.favorites-menu-item.active {
+  background-color: rgba(255, 165, 0, 0.4);
+}
+
+#favorites-button {
+  font-size: 1.2em;
+}
+
+#favorites-button.active {
+  background-color: transparent!important;
+  color: var(--main-bg-color) !important;
+}
+
+.favorites-empty {
+  text-align: center;
+  padding: 20px;
+  color: black;
+  font-style: italic;
+}
+
+.favorite-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #FF6347;
+  font-size: 1.2em;
+  padding: 0 5px;
+}
+
+.favorite-remove:hover {
+  transform: scale(1.2);
+}
+/* Reset all inherited styles to avoid external overrides */
+  .keyboard-container {
+    all: unset !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  #popisky h3 {
+    text-align: center !important;
+  }
+  .shortcut-table {
+    table-layout: fixed;  
+    width: 100%;  /*výchozi hodnota bila auto přepsano na 100% a dokonale centrovaní obsah na střed*/
+    max-width: 100%; /*výchozí hodnota bila 600px přepsano na 100% a dokonale centrovaní obsah na střed*/ 
+    border-collapse: collapse; 
+    font-family: Arial, sans-serif; 
+    margin: 0;  
+  }
+  .shortcut-table th,
+  .shortcut-table td {
+    border: 1px solid #444 !important;
+    padding: 0.5em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+  .shortcut-table tr:first-child td {
+    background-color: #222 !important;
+    color: #fff !important;
+  }
+  .shortcut-table tr:nth-child(even) td {
+    background-color: #f2f2f2 !important;
+  }
+  .shortcut-table tr:hover td {
+    background-color: #ddd!important;
+  }
